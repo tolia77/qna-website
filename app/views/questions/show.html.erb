@@ -1,11 +1,39 @@
-<p style="color: green"><%= notice %></p>
-
 <%= render @question %>
-<%= render "answers/form", answer: @answer %>
-<%= link_to 'Answers', question_answers_path(@question) %>
-<div>
-  <%= link_to "Edit this question", edit_question_path(@question) %> |
-  <%= link_to "Back to questions", questions_path %>
+<% unless current_user_answer %>
+  <%= form_with(model: @answer, url: question_answers_path(@question), html: {method: :post}) do |form| %>
+    <% if @answer.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
 
-  <%= button_to "Destroy this question", @question, method: :delete %>
+        <ul>
+          <% @answer.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :text, style: "display: block" %>
+      <%= form.text_field :text %>
+    </div>
+
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+<% end %>
+<h1>Answers</h1>
+
+<div id="answers">
+  <% @answers.each do |answer| %>
+    <%= render answer %>
+  <% end %>
 </div>
+<% if current_user == @question.user %>
+  <div>
+    <%= link_to "Edit this question", edit_question_path(@question) %> |
+
+    <%= button_to "Destroy this question",@question, method: :delete %>
+  </div>
+<% end %>

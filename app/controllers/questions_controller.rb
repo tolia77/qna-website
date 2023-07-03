@@ -1,15 +1,25 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[ show edit update destroy ]
-  before_action :check_user, only: %i[ edit update destroy ]
+  before_action :check_logged_in, only: %i[ new create edit update destroy ]
+  before_action only: %i[ edit update destroy ] do
+    check_user(@question)
+  end
 
   # GET /questions or /questions.json
   def index
-    @questions = Question.all
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      @questions = @category.questions
+    else
+      @questions = Question.all
+    end
   end
 
   # GET /questions/1 or /questions/1.json
   def show
     @answer = Answer.new
+    question = Question.find(params[:id])
+    @answers = question.answers
   end
 
   # GET /questions/new
@@ -82,9 +92,4 @@ class QuestionsController < ApplicationController
       params.require(:question).permit(:title, :content, :category_id, :user_id)
     end
 
-    def check_user
-      unless @question.user == current_user || current_user.admin?
-        render 'shared/access_denied'
-      end
-    end
 end

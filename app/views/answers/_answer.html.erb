@@ -1,22 +1,14 @@
-<div id="<%= dom_id answer %>">
-  <p>
-    <strong>Text:</strong>
-    <%= answer.text %>
-  </p>
-
-  <p>
-    <strong>Accepted:</strong>
-    <%= answer.accepted %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= answer.user_id %>
-  </p>
-
-  <p>
-    <strong>Question:</strong>
-    <%= answer.question_id %>
-  </p>
-
+<div class="answer<%= "-accepted" if answer.accepted %>">
+  <h1><%= answer.user.name %></h1>
+  <p><%= answer.text %></p>
+  <% if answer.user == current_user %>
+    <%= link_to 'Edit answer', edit_answer_path(answer) %>
+    <%= link_to 'Delete answer', answer, method: :delete %>
+  <% end %>
+  <% if answer.question.user == current_user %>
+    <%= form_for(answer) do |form| %>
+      <%= form.hidden_field :accepted, value: !answer.accepted %>
+      <%= form.submit (answer.accepted ? 'mark as incorrect' : 'mark as correct'), class: 'btn btn-success' %>
+    <% end %>
+  <%  end %>
 </div>

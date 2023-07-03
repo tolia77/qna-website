@@ -11,4 +11,10 @@ module UsersHelper
       render 'shared/access_denied'
     end
   end
+
+  def check_user(object)
+    unless object.user == current_user || current_user.admin?
+      render 'shared/access_denied'
+    end
+  end
 end

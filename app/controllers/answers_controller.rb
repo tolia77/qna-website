@@ -1,23 +1,13 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: %i[ show edit update destroy ]
-
-  # GET /answers or /answers.json
-  def index
-    question = Question.find(params[:question_id])
-    @answers = question.answers
+  before_action :check_logged_in, only: %i[ new create edit update destroy ]
+  before_action only: %i[ edit destroy ] do
+    check_user(@answer)
   end
-
-  # GET /answers/1 or /answers/1.json
-  def show
-  end
-
-  # GET /answers/new
-  def new
-    @answer = Answer.new
-  end
-
+  before_action :only_accepted_changed, only: [:update]
   # GET /answers/1/edit
   def edit
+    @question = Answer.find(params[:id]).question
   end
 
   # POST /answers or /answers.json
@@ -27,10 +17,16 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to question_answers_path(@question), notice: "Answer was successfully created." }
+        format.html {
+          flash[:success] = "Answer was successfully created."
+          redirect_to question_answers_path(@question)
+        }
         format.json { render :show, status: :created, location: @answer }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html {
+          flash[:danger] = 'You already left an answer'
+          redirect_to question_answers_path(@question)
+        }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end
@@ -40,7 +36,10 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        format.html { redirect_to answer_url(@answer), notice: "Answer was successfully updated." }
+        format.html {
+          flash[:success] = "Answer was successfully updated."
+          redirect_to @answer.question
+        }
         format.json { render :show, status: :ok, location: @answer }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +53,7 @@ class AnswersController < ApplicationController
     @answer.destroy
 
     respond_to do |format|
-      format.html { redirect_to answers_url, notice: "Answer was successfully destroyed." }
+      format.html { redirect_to @answer.question, notice: "Answer was successfully destroyed." }
       format.json { head :no_content }
     end
   end

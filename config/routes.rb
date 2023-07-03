@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  resources :issues
   resources :questions, shallow: true do
-    resources :answers
+    resources :answers, only: [:create, :edit, :update, :destroy]
   end
   resources :tags
-  resources :categories
+  resources :categories do
+    resources :questions, only: :index
+  end
   resources :posts
   resources :users, path: 'users/profiles'
   devise_for :users

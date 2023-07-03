@@ -1,4 +1,16 @@
 .question {
   border-style: solid;
   border-color: black;
+  margin-bottom: 10px;
+}
+.answer {
+  background-color: lightblue;
+}
+.category {
+  border-style: solid;
+  border-color: black;
+  margin-bottom: 10px;
+}
+.answer-accepted {
+  background-color: greenyellow;
 }
