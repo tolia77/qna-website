@@ -5,6 +5,13 @@ class AnswersController < ApplicationController
     check_user(@answer)
   end
   before_action :only_accepted_changed, only: [:update]
+  def index
+    @answers = Question.find(params[:question_id]).answers
+  end
+  def new
+    @answer = Answer.new
+    @question = Question.find(params[:question_id])
+  end
   # GET /answers/1/edit
   def edit
     @question = Answer.find(params[:id]).question
@@ -21,11 +28,17 @@ class AnswersController < ApplicationController
           flash[:success] = "Answer was successfully created."
           redirect_to question_answers_path(@question)
         }
+        format.turbo_stream {
+          render :create, locals: {answer: @answer, question: @question}
+        }
         format.json { render :show, status: :created, location: @answer }
       else
         format.html {
-          flash[:danger] = 'You already left an answer'
+          flash[:danger] = 'You have already left an answer'
           redirect_to question_answers_path(@question)
+        }
+        format.turbo_stream {
+          render :new, status: :unprocessable_entity, locals: {answer: @answer, question: @question}
         }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
@@ -40,9 +53,15 @@ class AnswersController < ApplicationController
           flash[:success] = "Answer was successfully updated."
           redirect_to @answer.question
         }
+        format.turbo_stream {
+          render :update, locals: { answer: @answer, question: @answer.question }
+        }
         format.json { render :show, status: :ok, location: @answer }
       else
         format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream {
+          render :edit, status: :unprocessable_entity, locals: { answer: @answer, question: @answer.question }
+        }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end
@@ -54,6 +73,9 @@ class AnswersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @answer.question, notice: "Answer was successfully destroyed." }
+      format.turbo_stream {
+        render :destroy, locals: { answer: @answer, question: @answer.question }
+      }
       format.json { head :no_content }
     end
   end

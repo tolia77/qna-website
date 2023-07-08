@@ -1,7 +1,7 @@
 <h1>New answer</h1>
-
-<%= render "form", answer: @answer %>
-
+<%= turbo_frame_tag 'create_answer' do %>
+  <%= render 'form', answer: @answer, question: @question %>
+<% end %>
 <br>
 
 <div>

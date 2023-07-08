@@ -1,0 +1,4 @@
+<%= turbo_stream.prepend 'answers' do %>
+  <%= render answer %>
+<% end %>
+<%= turbo_stream.remove 'create_answer' %>

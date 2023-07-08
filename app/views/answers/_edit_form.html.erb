@@ -1,4 +1,4 @@
-<%= form_with(model: answer, url: question_answers_path(question), html: {method: :post}) do |form| %>
+<%= form_with(model: answer, url: url_for(action: :update, controller: :answers, id: answer.id, question_id: question.id), html: {method: :patch}) do |form| %>
   <% if answer.errors.any? %>
     <div style="color: red">
       <ul>

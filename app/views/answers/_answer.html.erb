@@ -1,14 +1,14 @@
-<div class="answer<%= "-accepted" if answer.accepted %>">
+<div class="answer<%= "-accepted" if answer.accepted %>" id=<%= dom_id answer %>>
   <h1><%= answer.user.name %></h1>
   <p><%= answer.text %></p>
   <% if answer.user == current_user %>
     <%= link_to 'Edit answer', edit_answer_path(answer) %>
-    <%= link_to 'Delete answer', answer, method: :delete %>
+    <%= link_to 'Delete answer', answer, data:{ turbo_method: :delete } %>
   <% end %>
   <% if answer.question.user == current_user %>
-    <%= form_for(answer) do |form| %>
+    <%= form_for(answer, remote: true) do |form| %>
       <%= form.hidden_field :accepted, value: !answer.accepted %>
       <%= form.submit (answer.accepted ? 'mark as incorrect' : 'mark as correct'), class: 'btn btn-success' %>
     <% end %>
-  <%  end %>
+  <% end %>
 </div>

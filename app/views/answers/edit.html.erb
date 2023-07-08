@@ -1,26 +1,7 @@
 <h1>Editing answer</h1>
 
-<%= form_with(model: @answer, url: url_for(action: :update, controller: :answers, id: @answer.id, question_id: @question.id), html: {method: :patch}) do |form| %>
-  <% if @answer.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
-
-      <ul>
-        <% @answer.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :text, style: "display: block" %>
-    <%= form.text_field :text %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+<%= turbo_frame_tag(dom_id @answer) do %>
+  <%= render 'edit_form', answer: @answer, question: @question %>
 <% end %>
 
 <br>

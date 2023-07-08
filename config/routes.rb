@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :issues
   resources :questions, shallow: true do
-    resources :answers, only: [:create, :edit, :update, :destroy]
+    resources :answers, only: [:index, :new, :create, :edit, :update, :destroy]
   end
   resources :tags
   resources :categories do
