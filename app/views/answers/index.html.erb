@@ -4,7 +4,8 @@
 
 <div id="answers">
   <% @answers.each do |answer| %>
-    <%= render answer %>
+    <strong><%= answer.question.title %></strong>
+    <p><%= answer.text %></p>
   <% end %>
 </div>
 

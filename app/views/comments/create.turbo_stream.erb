@@ -1,0 +1,5 @@
+<%= turbo_stream.append 'comments' do %>
+  <%= turbo_frame_tag dom_id(comment) do %>
+    <%= render comment %>
+  <% end %>
+<% end %>

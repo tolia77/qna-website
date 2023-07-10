@@ -1,4 +1,5 @@
-<%= form_with(model: answer, url: url_for(action: :update, controller: :answers, id: answer.id, question_id: question.id), html: {method: :patch}) do |form| %>
+<%= form_with(model: answer, html: {method: :patch}) do |form| %>
+  <% p url_for(action: :update, controller: :answers, id: answer.id, question_id: question.id) %>
   <% if answer.errors.any? %>
     <div style="color: red">
       <ul>

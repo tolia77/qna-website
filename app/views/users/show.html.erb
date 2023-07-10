@@ -4,3 +4,5 @@
   <%= link_to 'New post', new_post_path, class: 'btn btn-primary' %>
 <% end %>
 <%= link_to 'Edit user', edit_user_registration_path, class: 'btn btn-success' %>
+<%= link_to 'Questions', user_questions_path(@user) %>
+<%= link_to 'Answers', user_answers_path(@user) %>

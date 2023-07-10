@@ -10,6 +10,9 @@ class QuestionsController < ApplicationController
     if params[:category_id]
       @category = Category.find(params[:category_id])
       @questions = @category.questions
+    elsif params[:user_id]
+      @user = User.find(params[:user_id])
+      @questions = @user.questions
     else
       @questions = Question.all
     end

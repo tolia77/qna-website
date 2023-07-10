@@ -1,5 +1,5 @@
 <%= turbo_stream.replace(dom_id answer) do %>
   <%= turbo_frame_tag 'create_answer' do %>
-    <%= link_to 'New answer', new_question_answer_path(question) %>
+    <%= render 'answers/form', answer: Answer.new, question: question %>
   <% end %>
 <% end %>

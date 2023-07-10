@@ -1,0 +1,10 @@
+<div id="<%= dom_id comment %>">
+  <p>
+    <strong><%= comment.user.name %>: </strong>
+    <%= comment.text %>
+  </p>
+  <% if comment.user == current_user %>
+    <%= link_to 'Edit', edit_answer_comment_path(id: comment.id, answer_id: comment.answer.id) %>
+    <%= link_to 'Delete', answer_comment_path(id: comment.id, answer_id: comment.answer.id), data: {turbo_method: :delete} %>
+  <% end %>
+</div>
