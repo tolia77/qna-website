@@ -1,6 +1,10 @@
-<div class="question">
+<div class="question-partial">
   <h1><%= link_to question.title, question %></h1>
-  <p><%= question.user.name %></p>
-  <p><%= question.category.name %></p>
+  <div class="category-header">
+    <%= image_tag(question.category.image, class: 'category-img') if question.category.image.attached?%>
+    <p>
+      <%= link_to question.category.name, category_questions_path(question.category), data: { turbo: false } %>
+    </p>
+  </div>
   <p><%= question.content %></p>
 </div>

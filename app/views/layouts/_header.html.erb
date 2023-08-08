@@ -1,22 +1,24 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <%= link_to 'QNA App', root_path, class: "navbar-brand"%>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <%= link_to 'QNA App', root_path, class: "navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-      <%= link_to 'Questions', questions_path, class: 'nav-link' %>
-    </li>
-    <li class="nav-item">
-      <%= link_to 'Categories', categories_path, class: 'nav-link' %>
-    </li>
-    <li class="nav-item">
-      <%= link_to 'Issue', new_issue_path, class: 'nav-link' %>
-    </li>
-  </ul>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to 'Questions', questions_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Topics', categories_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Issue', new_issue_path, class: 'nav-link' %>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ms-auto me-1"> <!-- Align to the right -->
       <% if user_signed_in? %>
+        <%= link_to 'New question', new_question_path, class: 'btn btn-info me-1' %>
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <%= current_user.name %>
@@ -28,8 +30,8 @@
         </div>
 
       <% else %>
-        <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary m-1'%>
-        <%= link_to 'Log in', new_user_session_path, class: 'btn btn-secondary m-1'%>
+        <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary m-1' %>
+        <%= link_to 'Log in', new_user_session_path, class: 'btn btn-outline-primary m-1' %>
       <% end %>
     </ul>
   </div>

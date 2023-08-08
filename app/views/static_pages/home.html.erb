@@ -1,2 +1,11 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="home">
+  <h1 style="font-size: 96px;">Welcome to Q&A app</h1>
+  <h2>Have a question? Ask it right now!</h2>
+  <br>
+  <%= link_to 'Ask a question', new_question_path, class: 'btn btn-outline-primary btn-lg' %>
+  <%= link_to 'Other questions', questions_path, class: 'btn btn-outline-success btn-lg' %>
+</div>
+<h2>Popular topics</h2>
+<% @topics.each do |topic| %>
+  <%= render topic %>
+<% end %>
