@@ -1,14 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Comments</h1>
-
-<div id="comments">
-  <% @comments.each do |comment| %>
-    <%= render comment %>
-    <p>
-      <%= link_to "Show this comment", comment %>
-    </p>
+<%= turbo_frame_tag 'comments' do %>
+  <% if user_signed_in? %>
+    <%= turbo_frame_tag 'create_comment' do %>
+      <%= link_to 'Add comment', new_answer_comment_path(@answer, Comment.new) %>
+    <% end %>
   <% end %>
-</div>
-
-<%= link_to "New comment", new_comment_path %>
+  <% @comments.each do |comment| %>
+    <%= turbo_frame_tag dom_id(comment) do %>
+      <%= render comment %>
+    <% end %>
+  <% end %>
+<% end %>

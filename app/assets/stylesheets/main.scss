@@ -9,3 +9,14 @@
   min-width: inherit;
   display: inline-block;
 }
+
+.header-text {
+  display: inline-block;
+  text-align: center;
+  background-color: lightblue;
+  border-color: lightblue;
+  border-style: solid;
+  border-radius: 10px;
+  padding-inline: 30px;
+  padding-block: 10px;
+}

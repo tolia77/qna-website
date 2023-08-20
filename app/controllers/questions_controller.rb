@@ -9,12 +9,12 @@ class QuestionsController < ApplicationController
   def index
     if params[:category_id]
       @category = Category.find(params[:category_id])
-      @questions = @category.questions
+      @questions = @category.questions.reverse
     elsif params[:user_id]
       @user = User.find(params[:user_id])
-      @questions = @user.questions
+      @questions = @user.questions.reverse
     else
-      @questions = Question.all
+      @questions = Question.all.reverse
     end
   end
 
@@ -49,6 +49,7 @@ class QuestionsController < ApplicationController
     Category.all.each do |category|
       @categories << [category.name, category.id]
     end
+    @question.category_id - Category.find_by(name: params[:category_id]).id
     respond_to do |format|
       if @question.save
         format.html { redirect_to question_url(@question), notice: "Question was successfully created." }

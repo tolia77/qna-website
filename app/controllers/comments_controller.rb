@@ -5,6 +5,10 @@ class CommentsController < ApplicationController
     check_user(@comment)
   end
 
+  def index
+    @answer = Answer.find(params[:answer_id])
+    @comments = @answer.comments
+  end
   # GET /comments/new
   def new
     @comment = Comment.new
@@ -22,7 +26,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment.answer.question, notice: "Comment was successfully created." }
-        format.turbo_stream { render :create, locals: { comment: @comment } }
+        format.turbo_stream { render :create, locals: { comment: @comment, answer: @comment.answer } }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new, status: :unprocessable_entity }

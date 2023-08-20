@@ -6,11 +6,13 @@
       <%= link_to @question.category.name, category_questions_path(@question.category), data: { turbo: false } %>
     </p>
   </div>
-  <p><%= @question.user.name %></p>
   <p><%= @question.content %></p>
+  <p id="question-date"><%= @question.created_at %></p>
+  <p id="question-author"><%= link_to @question.user.name, @question.user %></p>
 </div>
-
-<h1>Answers</h1>
+<br>
+<hr>
+<h1 style="text-align: center">Answers</h1>
 <% if user_signed_in? %>
   <% unless current_user_answer %>
     <%= turbo_frame_tag 'create_answer' do %>

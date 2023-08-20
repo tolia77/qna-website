@@ -1,10 +1,16 @@
 <div class="question-partial">
-  <h1><%= link_to question.title, question %></h1>
-  <div class="category-header">
-    <%= image_tag(question.category.image, class: 'category-img') if question.category.image.attached?%>
-    <p>
-      <%= link_to question.category.name, category_questions_path(question.category), data: { turbo: false } %>
-    </p>
+  <div class="question-body">
+    <h2><%= link_to question.title, question, class: 'question-header' %></h2>
+    <div class="category-header">
+      <%= image_tag(question.category.image, class: 'category-img') if question.category.image.attached?%>
+      <p>
+        <%= link_to question.category.name, category_questions_path(question.category), data: { turbo: false } %>
+      </p>
+    </div>
+    <p><%= question.content[0, 100] %></p>
   </div>
-  <p><%= question.content %></p>
+  <div class="question-answers">
+    <h2><%= question.answers.size %></h2>
+    <p><%= 'answer'.pluralize(question.answers.size) %></p>
+  </div>
 </div>

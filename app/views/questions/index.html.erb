@@ -1,10 +1,12 @@
 <p style="color: green"><%= notice %></p>
-
-<h1>Questions</h1>
+<div style="text-align: center">
+  <h1 class="header-text">Latest questions</h1>
+</div>
 
 <div id="questions">
   <% @questions.each do |question| %>
     <%= render question %>
+    <hr>
   <% end %>
 </div>
 

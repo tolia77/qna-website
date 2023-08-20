@@ -1,5 +1,7 @@
-<%= turbo_stream.prepend 'categories' do %>
-  <%= render category %>
+<%= turbo_stream.prepend 'topics' do %>
+  <%= turbo_frame_tag(dom_id category) do %>
+    <%= render category %>
+  <% end %>
 <% end %>
 <%= turbo_stream.update 'create_category' do %>
   <%= render 'form', category: Category.new %>

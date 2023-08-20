@@ -6,6 +6,8 @@
   <%= link_to 'Other questions', questions_path, class: 'btn btn-outline-success btn-lg' %>
 </div>
 <h2>Popular topics</h2>
-<% @topics.each do |topic| %>
-  <%= render topic %>
-<% end %>
+<div id="topics">
+  <% @topics.each do |topic| %>
+    <%= render topic %>
+  <% end %>
+</div>

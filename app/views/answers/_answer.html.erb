@@ -1,28 +1,22 @@
-<div class="answer<%= "-accepted" if answer.accepted %>" id=<%= dom_id answer %>>
+<div class="answer<%= " accepted" if answer.accepted %>" id=<%= dom_id answer %>>
   <div class="answer-header">
     <h1><%= answer.user.name %></h1>
     <% if answer.user == current_user %>
-      <%= link_to '', edit_answer_path(answer), class: "fa fa-pencil fa-2x btn btn-outline-primary m-1" %>
-      <%= link_to '', answer, data:{ turbo_method: :delete }, class: "fa fa-trash fa-2x btn btn-outline-primary m-1"  %>
+      <%= link_to '', edit_answer_path(answer), class: "fa fa-pencil fa-2x btn btn-outline-success m-1" %>
+      <%= link_to '', answer, data:{ turbo_method: :delete }, class: "fa fa-trash fa-2x btn btn-outline-danger m-1"  %>
+    <% end %>
+    <% if answer.question.user == current_user %>
+      <%= form_for(answer, remote: true) do |form| %>
+        <%= form.hidden_field :accepted, value: !answer.accepted %>
+        <%= form.button '', type: 'submit', class: (answer.accepted ? "fa fa-times fa-2x btn btn-outline-danger m-1" : "fa fa-check fa-2x btn btn-outline-success m-1") %>
+      <% end %>
     <% end %>
   </div>
   <p><%= answer.text %></p>
-  <% if answer.question.user == current_user %>
-    <%= form_for(answer, remote: true) do |form| %>
-      <%= form.hidden_field :accepted, value: !answer.accepted %>
-      <%= form.submit (answer.accepted ? 'mark as incorrect' : 'mark as correct'), class: 'btn btn-success' %>
-    <% end %>
-  <% end %>
-  <% if user_signed_in? %>
-    <%= turbo_frame_tag 'create_comment' do %>
-      <%= render "comments/form", comment: Comment.new, answer: answer %>
-    <% end %>
-  <% end %>
-  <div id="comments">
-    <% answer.comments.each do |comment| %>
-      <%= turbo_frame_tag dom_id(comment) do %>
-        <%= render comment %>
-      <% end %>
+  <hr>
+  <div class="comments" id="comments_<%= answer.id %>">
+    <%= turbo_frame_tag 'comments' do %>
+      <%= link_to "Comments (#{answer.comments.size})", answer_comments_path(answer) %>
     <% end %>
   </div>
 </div>
