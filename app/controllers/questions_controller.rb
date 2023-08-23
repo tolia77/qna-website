@@ -27,10 +27,6 @@ class QuestionsController < ApplicationController
 
   # GET /questions/new
   def new
-    @categories = []
-    Category.all.each do |category|
-      @categories << [category.name, category.id]
-    end
     @question = Question.new
   end
 
@@ -45,11 +41,6 @@ class QuestionsController < ApplicationController
   # POST /questions or /questions.json
   def create
     @question = current_user.questions.build(question_params)
-    @categories = []
-    Category.all.each do |category|
-      @categories << [category.name, category.id]
-    end
-    @question.category_id - Category.find_by(name: params[:category_id]).id
     respond_to do |format|
       if @question.save
         format.html { redirect_to question_url(@question), notice: "Question was successfully created." }

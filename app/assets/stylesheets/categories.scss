@@ -1,0 +1,43 @@
+.category {
+  border-style: solid;
+  border-color: black;
+  margin-bottom: 10px;
+}
+.category-header {
+  margin-top: 5px;
+  p {
+    font-weight: bolder;
+    display: inline-block;
+  }
+  img {
+    display: inline-block;
+    margin-left: 5px;
+  }
+}
+#topics {
+  display: grid;
+  grid-template-columns: 250px 250px 250px 250px 250px;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+.topic {
+  background-color: lightblue;
+  border-style: solid;
+  border-color: black;
+  text-align: center;
+}
+
+.topic-link {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.topic-search {
+  cursor: pointer;
+}
+#search-results {
+  background-color: lightgrey;
+  width: 200px;
+  max-height: 200px;
+  overflow-y: scroll;
+}

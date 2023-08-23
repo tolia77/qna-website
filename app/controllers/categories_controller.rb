@@ -4,11 +4,9 @@ class CategoriesController < ApplicationController
 
   def search
     @categories = Category.where("LOWER(name) LIKE ?", "%#{params[:key].downcase}%")
-    render json: @categories
-  end
-
-  def searchtest
-
+    respond_to do |format|
+      format.turbo_stream { render :search, locals: { categories: @categories } }
+    end
   end
 
   # GET /categories or /categories.json

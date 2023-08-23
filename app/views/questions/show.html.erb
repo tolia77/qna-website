@@ -1,7 +1,7 @@
 <div class="question">
   <h1><%=@question.title %></h1>
   <div class="category-header">
-    <%= image_tag(@question.category.image, class: 'category-img') if @question.category.image.attached?%>
+    <%= image_tag(@question.category.image.variant(resize_and_pad: [30, 30])) if @question.category.image.attached?%>
     <p>
       <%= link_to @question.category.name, category_questions_path(@question.category), data: { turbo: false } %>
     </p>
@@ -12,6 +12,13 @@
 </div>
 <br>
 <hr>
+<% if current_user == @question.user %>
+  <div id="question-controls">
+    <%= link_to "Edit", edit_question_path(@question) %> |
+
+    <%= link_to "Delete",@question, method: :delete %>
+  </div>
+<% end %>
 <h1 style="text-align: center">Answers</h1>
 <% if user_signed_in? %>
   <% unless current_user_answer %>
@@ -28,10 +35,3 @@
     <% end %>
   <% end %>
 </div>
-<% if current_user == @question.user %>
-  <div>
-    <%= link_to "Edit this question", edit_question_path(@question) %> |
-
-    <%= button_to "Destroy this question",@question, method: :delete %>
-  </div>
-<% end %>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :categories, except: :show do
     resources :questions, only: :index
   end
-  get 'categories/search/:key', to: 'categories#search'
+  post 'categories/search'
   get 'categories/searchtest'
   resources :posts
   resources :users, path: 'users/profiles' do

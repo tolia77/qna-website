@@ -1,0 +1,5 @@
+<%= turbo_stream.update "search-results" do %>
+  <% categories.each do |category| %>
+    <%= render partial: 'categories/category_search', locals: { category: category } %>
+  <% end %>
+<% end %>

@@ -1,3 +1,9 @@
+<strong>Category:</strong>
+<span id="category-selected"></span>
+<%= form_with(url: categories_search_path, method: :post, data: { controller: :search, search_target: :form }) do |search_form| %>
+  <%= search_form.search_field :key, data: { action: "input->search#search" } %>
+<% end %>
+<div id="search-results"></div>
 <%= form_with(model: question) do |form| %>
   <% if question.errors.any? %>
     <div style="color: red">
@@ -10,7 +16,7 @@
       </ul>
     </div>
   <% end %>
-
+  <br>
   <div>
     <strong><%= form.label :title, style: "display: block" %></strong>
     <%= form.text_field :title, size: 100 %>
@@ -22,13 +28,7 @@
   </div>
 
   <div>
-    <strong><%= form.label :topic, style: "display: block" %></strong>
-    <%= form.text_field :category_id, list: 'categories' %>
-    <datalist id="categories">
-      <% @categories.each do |category| %>
-        <option value="<%= category[0] %>"><%= category[0] %></option>
-      <% end %>
-    </datalist>
+    <%= form.hidden_field :category_id %>
   </div>
 
   <div>
