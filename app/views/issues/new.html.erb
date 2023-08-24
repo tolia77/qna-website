@@ -5,5 +5,7 @@
 <br>
 
 <div>
-  <%= link_to "Back to issues", issues_path %>
+  <% if current_user.admin? %>
+    <%= link_to "Back to issues", issues_path %>
+  <% end %>
 </div>

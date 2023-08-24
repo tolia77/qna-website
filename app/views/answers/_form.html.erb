@@ -10,11 +10,11 @@
   <% end %>
 
   <div>
-    <%= form.label :text, style: "display: block" %>
-    <%= form.text_area :text %>
+    <%= form.label :text, 'Your answer', style: "display: block" %>
+    <%= form.text_area :text, size: '100x10' %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

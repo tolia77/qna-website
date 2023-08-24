@@ -29,7 +29,10 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to category_url(@category), notice: "Category was successfully created." }
+        format.html {
+          redirect_to category_url(@category)
+          flash[:success] =  "Issue was successfully destroyed." "Category was successfully created."
+        }
         format.turbo_stream { render :create, locals: { category: @category } }
         format.json { render :show, status: :created, location: @category }
       else
@@ -44,7 +47,10 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to category_url(@category), notice: "Category was successfully updated." }
+        format.html {
+          redirect_to category_url(@category)
+          flash[:success] =  "Issue was successfully destroyed." "Category was successfully updated."
+        }
         format.turbo_stream { render :update, locals: { category: @category } }
         format.json { render :show, status: :ok, location: @category }
       else
@@ -60,7 +66,10 @@ class CategoriesController < ApplicationController
     @category.destroy
 
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
+      format.html {
+        redirect_to categories_url
+        flash[:success] =  "Issue was successfully destroyed." "Category was successfully destroyed."
+      }
       format.turbo_stream { render :destroy, locals: { category: @category } }
       format.json { head :no_content }
     end

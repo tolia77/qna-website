@@ -1,11 +1,20 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: %i[ show edit update destroy ]
   before_action :check_logged_in, only: %i[ new create index destroy ]
-  before_action :check_is_admin, only: %i[ index destroy ]
+  before_action only:  %i[ show destroy ] do
+    check_user(@issue)
+  end
+  before_action :check_is_admin, only: %i[ index ]
 
   # GET /issues or /issues.json
+  def show
+  end
   def index
-    @issues = Issue.all
+    if params[:user_id]
+      @issues = User.find(params[:user_id]).issues
+    else
+      @issues = Issue.all
+    end
   end
 
   # GET /issues/new
@@ -19,7 +28,10 @@ class IssuesController < ApplicationController
     @issue.user_id = current_user.id
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to root_path, notice: "Issue was successfully created." }
+        format.html {
+          flash[:success] = "Issue was successfully created."
+          redirect_to root_path
+        }
         format.json { render :show, status: :created, location: @issue }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -33,7 +45,10 @@ class IssuesController < ApplicationController
     @issue.destroy
 
     respond_to do |format|
-      format.html { redirect_to issues_url, notice: "Issue was successfully destroyed." }
+      format.html {
+        flash[:success] =  "Issue was successfully destroyed."
+        redirect_to issues_url
+      }
       format.json { head :no_content }
     end
   end
