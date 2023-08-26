@@ -1,0 +1,19 @@
+.post {
+  padding: 10px;
+  background-color: lightblue;
+  border-style: solid;
+  border-color: lightblue;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  .post-header {
+    text-align: center;
+    font-weight: 600;
+  }
+  .post-content {
+    word-break: break-word;
+    margin-bottom: 0px;
+  }
+  .post-date {
+    font-weight: lighter;
+  }
+}

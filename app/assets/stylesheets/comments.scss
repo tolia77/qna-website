@@ -1,0 +1,18 @@
+.comment {
+  margin-bottom: 10px;
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.comments {
+  a {
+    text-decoration: none;
+    color: darkslategrey;
+  }
+  a:hover {
+    text-decoration: underline dotted;
+    color: black;
+  }
+}
+

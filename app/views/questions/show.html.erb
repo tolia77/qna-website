@@ -7,7 +7,7 @@
     </p>
   </div>
   <p><%= @question.content %></p>
-  <p id="question-date"><%= @question.created_at %></p>
+  <p id="question-date"><%= @question.created_at.strftime('%d %b %Y %H:%M') %></p>
   <p id="question-author"><%= link_to @question.user.name, @question.user %></p>
 </div>
 <br>

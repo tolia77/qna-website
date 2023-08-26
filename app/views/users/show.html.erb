@@ -1,8 +1,18 @@
-<h1>Users#show</h1>
-<%= @user.email %>
+<div class="user">
+  <h1><%= @user.name %></h1>
+  <p>Account created: <%= @user.created_at %></p>
+  <div class="user-stats">
+    <div class="user-stats-item">
+      <h3><%= link_to @user.questions.size, user_questions_path(@user) %></h3>
+      <p><%= 'question'.pluralize(@user.questions.size) %></p>
+    </div>
+
+    <div class="user-stats-item">
+      <h3><%= link_to @user.answers.size, user_answers_path(@user) %></h3>
+      <p><%= 'answer'.pluralize(@user.answers.size) %></p>
+    </div>
+  </div>
+</div>
 <% if @user.admin? %>
   <%= link_to 'New post', new_post_path, class: 'btn btn-primary' %>
 <% end %>
-<%= link_to 'Edit user', edit_user_registration_path, class: 'btn btn-success' %>
-<%= link_to 'Questions', user_questions_path(@user) %>
-<%= link_to 'Answers', user_answers_path(@user) %>

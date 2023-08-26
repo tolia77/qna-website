@@ -1,4 +1,4 @@
-<div class="topic-search" id="<%= category.id %>" data-controller="topic">
+<div class="category-search" id="<%= category.id %>" data-controller="category">
   <%= image_tag(category.image.variant(resize_and_pad: [30, 30])) if category.image.attached? %>
   <%= category.name %>
 </div>

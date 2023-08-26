@@ -1,0 +1,21 @@
+.user {
+  text-align: center;
+  .user-stats {
+    padding: 5px;
+    background-color: lightblue;
+    display: inline-block;
+    border-style: solid;
+    border-color: lightblue;
+    border-radius: 5px;
+  }
+  .user-stats-item {
+    display: inline-block;
+    margin-right: 10px;
+    a {
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline dotted;
+    }
+  }
+}

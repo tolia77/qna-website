@@ -7,10 +7,11 @@
     <%= link_to "New category", new_category_path %>
   <% end %>
 <% end %>
-<div id="topics">
-  <% @categories.each do |topic| %>
-    <%= turbo_frame_tag(dom_id topic) do %>
-      <%= render topic %>
+<div id="categories">
+  <% @categories.each do |category| %>
+    <%= turbo_frame_tag(dom_id category) do %>
+      <%= render category %>
     <% end %>
   <% end %>
 </div>
+<%= will_paginate @categories %>

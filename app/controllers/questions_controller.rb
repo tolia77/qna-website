@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
       @user = User.find(params[:user_id])
       @questions = @user.questions.reverse
     else
-      @questions = Question.all.reverse
+      @questions = Question.all.reverse_order.paginate(page: params[:page], per_page: 10)
     end
   end
 
@@ -43,7 +43,10 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.build(question_params)
     respond_to do |format|
       if @question.save
-        format.html { redirect_to question_url(@question), notice: "Question was successfully created." }
+        format.html {
+          flash[:success] = "Question was successfully created."
+          redirect_to question_url(@question)
+        }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -60,7 +63,10 @@ class QuestionsController < ApplicationController
     end
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to question_url(@question), notice: "Question was successfully updated." }
+        format.html {
+          flash[:success] = "Question was successfully updated."
+          redirect_to question_url(@question)
+        }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -74,7 +80,10 @@ class QuestionsController < ApplicationController
     @question.destroy
 
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: "Question was successfully destroyed." }
+      format.html {
+        flash[:success] = "Question was successfully destroyed."
+        redirect_to questions_url
+      }
       format.json { head :no_content }
     end
   end

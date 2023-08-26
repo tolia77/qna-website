@@ -1,10 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @post %>
-
-<div>
-  <%= link_to "Back to posts", posts_path %>
-  <%= link_to "Edit this post", edit_post_path(@post) if current_user.admin? %> 
-
-  <%= button_to "Destroy this post", @post, method: :delete if current_user.admin?  %>
+<div style="text-align: center">
+  <h1 class="header-text"><%= @post.title %></h1>
 </div>
+<p><%= @post.content %></p>
+
+<% if current_user.admin? %>
+  <%= link_to "Edit this post", edit_post_path(@post)%>
+  <%= button_to "Destroy this post", @post, method: :delete %>
+<% end %>

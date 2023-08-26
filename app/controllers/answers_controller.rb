@@ -6,8 +6,7 @@ class AnswersController < ApplicationController
   end
   before_action :only_accepted_changed, only: [:update]
   def index
-    @user = User.find(params[:user_id])
-    @answers = @user.answers
+    @answers = User.find(params[:user_id]).answers
   end
   def new
     @answer = Answer.new
