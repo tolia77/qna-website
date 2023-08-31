@@ -5,6 +5,7 @@
   border-color: lightblue;
   border-radius: 5px;
   margin-bottom: 10px;
+  box-shadow: 1px 3px 5px black;
   .post-header {
     text-align: center;
     font-weight: 600;
@@ -13,7 +14,7 @@
     word-break: break-word;
     margin-bottom: 0px;
   }
-  .post-date {
-    font-weight: lighter;
-  }
+}
+.post-date {
+  font-weight: lighter;
 }

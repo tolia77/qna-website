@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="col-sm-5">
     <%= form.label :text, style: "display: block" %>
-    <%= form.text_area :text %>
+    <%= form.text_area :text, class: 'form-control' %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-sm btn-success my-1' %>
   </div>
 <% end %>

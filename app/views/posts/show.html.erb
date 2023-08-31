@@ -3,7 +3,9 @@
 <div style="text-align: center">
   <h1 class="header-text"><%= @post.title %></h1>
 </div>
-<p><%= @post.content %></p>
+<p class="post-date" style="color: red">Posted: <%= @post.created_at %></p>
+<hr>
+<%= @post.content %>
 
 <% if current_user.admin? %>
   <%= link_to "Edit this post", edit_post_path(@post)%>

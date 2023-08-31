@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Topics</h1>
+<h1 class="header-text">Topics</h1>
 
 <% if user_signed_in? && current_user.admin? %>
   <%= turbo_frame_tag 'create_category' do %>

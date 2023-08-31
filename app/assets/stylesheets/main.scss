@@ -3,9 +3,11 @@ body {
   background-color: palegreen !important;
 }
 .container {
-  min-height: 80vh;
+  margin-bottom: 10px;
+  min-height: 85vh;
   background-color: white;
   padding-bottom: 10px;
+  box-shadow: 1px 1px 5px black;
 }
 .home {
   padding-top: 100px;
@@ -20,12 +22,7 @@ body {
 }
 
 .header-text {
-  display: inline-block;
   text-align: center;
-  background-color: lightblue;
-  border-color: lightblue;
-  border-style: solid;
-  border-radius: 10px;
-  padding-inline: 30px;
-  padding-block: 10px;
+  padding-bottom: 10px;
+  font-weight: 600;
 }

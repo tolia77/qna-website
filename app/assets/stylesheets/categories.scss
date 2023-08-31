@@ -10,12 +10,14 @@
   }
 }
 #categories {
+  align-items: center;
   display: grid;
-  grid-template-columns: 250px 250px 250px 250px 250px;
+  grid-template-columns: repeat(auto-fit, 250px);
   column-gap: 10px;
   row-gap: 10px;
 }
 .category {
+  box-shadow: 1px 1px 3px black;
   background-color: lightyellow;
   border-style: solid;
   border-width: 2px;

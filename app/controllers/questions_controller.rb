@@ -9,10 +9,10 @@ class QuestionsController < ApplicationController
   def index
     if params[:category_id]
       @category = Category.find(params[:category_id])
-      @questions = @category.questions.reverse
+      @questions = @category.questions.reverse_order.paginate(page: params[:page], per_page: 10)
     elsif params[:user_id]
       @user = User.find(params[:user_id])
-      @questions = @user.questions.reverse
+      @questions = @user.questions.reverse_order.paginate(page: params[:page], per_page: 10)
     else
       @questions = Question.all.reverse_order.paginate(page: params[:page], per_page: 10)
     end
